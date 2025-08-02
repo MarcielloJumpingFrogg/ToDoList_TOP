@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hi</title>
-</head>
-<body>
-    <li id="list">
-        
-    </li>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hi</title>
+    </head>
+    <body>
+        <div id="loginPage" class="interface">
+            <h1>Hi Again</h1>
+            <h3>Login</h3>
+            <h5 id="notFound"></h5>
+            <label for="loginUserName">User Name: </label>
+            <input type="text" name="loginUserName" id="loginUserName" />
+
+            <label for="loginPassword">Password: </label>
+            <input type="password" name="password" id="loginPassword" />
+
+            <button type="submit" id="loginCredentials">Login</button>
+            <button id="switchToRegister">Register</button>
+        </div>
+
+        <div id="registerPage" class="invisible">
+            <h1>Welcome</h1>
+            <h3>Register</h3>
+            <label for="registerUserName">User Name: </label>
+            <input type="text" name="registerUserName" id="registerUserName" />
+
+            <label for="registerPassword">Passwor: </label>
+            <input
+                type="password"
+                name="registerPassword"
+                id="registerPassword"
+            />
+
+            <button type="submit" id="registerCredentials">Register</button>
+            <button id="switchToLogin">Login</button>
+        </div>
+
+        <button id="newProject">project+</button>
+
+        <li id="list">
+            <button id="newTask">task+</button>
+        </li>
+    </body>
 </html>
