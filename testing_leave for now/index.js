@@ -12,25 +12,10 @@
 */
 
 import "./style.css"; 
-import { removeProjectFromStorage , createProjectInStorage } from "./storageManag";
-import loadPage from "./loadPage";
-
-import createDOMElements from "./createDOMElements";
+import { removeProjectFromStorage , createProjectInStorage, loadPage } from "./storageManag";
 
 createProjectInStorage('tes22')
-createProjectInStorage('waaaaaaaaaa')
-createDOMElements()
 loadPage()
-
-const buttons = document.querySelectorAll('.ProjectButtons')
-buttons.forEach(button => {
-    button.addEventListener('click', function(){
-        removeProjectFromStorage(button.dataset.id)
-    })
-
-})
-
-
 //((test.projects[0]).changeName('waa'))
 
 //createProjectInStorage('test2')

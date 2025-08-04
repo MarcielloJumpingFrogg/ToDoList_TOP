@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+
+        class project{
+            constructor(name)
+            {
+                this.name = name
+                this.task = []
+                
+            }
+
+            say()
+            {
+                console.log('say')
+            }
+        }
+
+        class Storage {
+            constructor()
+            {
+                this.projects = []
+                
+            } 
+            newProject(name)
+            {
+                this.projects.push(new project(name))
+            }
+        }
+
+        const storage = new Storage
+        
+        storage.newProject('ciao')
+        const stringVer = JSON.stringify(storage.projects[0])
+        const backToOr = JSON.parse(stringVer)
+        const remade = Object.assign(new project, backToOr)
+        
+
+    </script>
+</body>
+</html>
