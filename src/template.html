@@ -6,24 +6,43 @@
         <title>Hi</title>
     </head>
     <body>
-        <div id="sidebar">
-            <div id="stuff">
-                <button id="newTask">New Task</button>
+        <div id="sideBar">
+            <div id="filter">
+                <p class="indicator">Filter</p>
+                <button >General</button>
+                <button id="newTask" class="creator">New Task</button>
                 <button>See all</button>
                 <button>Today</button>
-                <section>Sort by</section> 
-            </div>
+                <div>
+                    <label for="sortBy">Sort By: </label>
+                    <select name="sortBy" id="sortBy">
+                        <option value="" selected disabled hidden autocomplete>---</option>
+                        <option value="date" autoconplete="off">Date</option>
+                        <option value="priority" autoconplete="off">Priority</option> 
+                    </select>
+                </div>
+            </div> 
 
-            <div id="projects">
-                
+            <div id="createdProjects">
+                <p class="indicator">Projects</p>
+                <button id="newProject" class="creator">project+</button>
+        
+                <li id="list">
+                    
+                </li>
             </div>
+        </div> 
+        
 
+        <div id="popUpScreenNewProject" class="hidden">
+            <div>
+                <label for="newProjectName">New Project:</label>
+                <input type="text" name="newProjectName" id="newProjectName" placeholder="Project1">
+                <br>
+                <button type="submit" id="submitNewProject">Create New Project</button>
+            </div>
         </div>
 
-        <button id="newProject">project+</button>
 
-        <li id="list">
-            
-        </li>
     </body>
 </html>

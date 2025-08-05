@@ -9,26 +9,31 @@
                 "checked" : false
             }
 
-*/
+*/ 
+
 
 import "./style.css"; 
 import { removeProjectFromStorage , createProjectInStorage } from "./storageManag";
 import loadPage from "./loadPage";
 
+import './popUpManager'
+
 import createDOMElements from "./createDOMElements";
 
-createProjectInStorage('tes22')
-createProjectInStorage('waaaaaaaaaa')
-createDOMElements()
+const submitNewProject = document.getElementById('submitNewProject')
 loadPage()
+submitNewProject.onclick = function()
+{
+    const newProjectName = document.getElementById('newProjectName').value
+    console.log(newProjectName)
+    createProjectInStorage(newProjectName)
+} 
 
-const buttons = document.querySelectorAll('.ProjectButtons')
-buttons.forEach(button => {
-    button.addEventListener('click', function(){
-        removeProjectFromStorage(button.dataset.id)
-    })
 
-})
+
+
+
+
 
 
 //((test.projects[0]).changeName('waa'))

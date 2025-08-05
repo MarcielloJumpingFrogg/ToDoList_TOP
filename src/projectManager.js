@@ -1,4 +1,4 @@
-import Project from './createProject'
+import Project from './createProject'   //not used currently
 
 class ProjectManager{
     constructor()
@@ -6,9 +6,9 @@ class ProjectManager{
         this.projects = []
     }
 
-    createProject(title)
+    importProject(item)     //not used currently
     {
-        this.projects.push(new Project(title)) 
+        this.projects.push(item) 
     }
 
     

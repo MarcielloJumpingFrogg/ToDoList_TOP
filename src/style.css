@@ -1,12 +1,186 @@
-.invisible {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    outline: none;
+    border: none;
+}
+
+body{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgb(255, 175, 175);
+}
+
+#sideBar{
+    min-width: 15ch;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 15vw;
+    height: 100vh;
+    background-color: bisque;
+    justify-content:flex-start; 
+    align-items: center;
+    gap: 10%;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px; 
+    box-shadow: 5px 5px 5px grey;
+}
+
+#filter{
+    margin-top: 10%;
+    display:flex;
+    flex-direction: column;
+    width: 80%;
+    height: 30%; 
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.5rem;
+}
+
+#filter button{
+    font-size: 1rem;
+
+}
+
+#filter select{
+    text-align: center;
+    font-size: 1rem;
+}
+
+.indicator{
+    color: rgb(51, 51, 51);
+    width: 75%;
+    text-align: center;
+    align-self: center;
+    border-bottom: 1px solid rgb(82, 82, 82); 
+}
+
+.indicator:hover{
+    text-decoration: underline;
+    color: black; 
+    cursor: default;
+}
+
+#createdProjects{
+    width: 80%;
+    justify-self: stretch; 
+    display: flex; 
+    flex-direction: column;
+    gap: 5px;
+    max-height: 50%; 
+}
+
+#list{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; 
+    gap: 5px;
+    max-height: 100%;
+    overflow: scroll;
+}
+
+#list div *{
+    margin: 2px;
+}
+
+.hidden {
     display: none;
 }
 
-.interface {
-    background-color: aquamarine;
+.show {
+    display: block;
+}
+
+#popUpScreenNewProject {
+    width: 50%;
+    height: 30%;
+    background-color: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(5px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    border-radius: 50px;
+    border: solid black 1px;
+    font-size: 2rem;
+}
+
+#popUpScreenNewProject label {
+    text-shadow: 2px 2px 3px rgb(0, 0, 0);
+}
+
+#popUpScreenNewProject input{
+    font-size: 2rem;
+    text-align: center;
+    border-radius: 20px;
+    border: solid black 1px;
+}
+
+#popUpScreenNewProject div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center ;
+    gap: 20px;
+}
+
+
+@keyframes rainbow { 
+	    0% { background-color: red; }
+	    14% { background-color: orange; }
+	    28% { background-color: yellow; }
+	    42% { background-color: green; }
+	    57% { background-color: blue; }
+	    71% { background-color: indigo; }
+	    85% { background-color: violet; }
+	    100% { background-color: red; }
+	}
+
+#submitNewProject {
+    display: block;
+    font-size: 1.5rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-inline: 30px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border: solid black 3px;
+    
+    background: linear-gradient(to left, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 50% ) right;
+    background-size: 200%; 
+
+    transition: background-position 0.3s linear, transform 0.3s linear;
+    
+    transition-timing-function: linear; 
+    
+}
+
+#submitNewProject:hover { 
+    
+    color: white;
+    background-position: left;
+    transform: scale(1.1); 
+    animation: rainbow 3s linear infinite;
+    animation-delay: 0.3s;
+    
+
+    
+
+} 
+
+#test {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;
 }
