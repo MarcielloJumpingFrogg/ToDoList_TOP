@@ -1,8 +1,11 @@
 import { removeProjectFromStorage } from "./storageManag"
-import projectManager from "./projectManager"
-import loadPage from "./loadPage"
+import { storageProject } from "./Project"
+import loadPage from "./InitialPageLoading"
 
-export default function()
+//domManagement
+
+
+function a()
 {
     const deleteButton = document.querySelectorAll('.projectDeleteButton')
     
@@ -19,11 +22,14 @@ export default function()
         button.addEventListener('click', function(){
             
             const parentId = (button.parentNode).dataset.id
-            const item = (projectManager.projects.find(o => o.id === parentId))
+
+            const item = (storageProject.find(o => o.id === parentId))
+
             item.changeName('paolo')
+
             localStorage.setItem(parentId, JSON.stringify(item))
-            loadPage()
-            console.log(item)
+
+
         })
     })
 

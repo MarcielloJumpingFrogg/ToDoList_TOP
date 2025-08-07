@@ -1,35 +1,41 @@
 import {removeProjectFromStorage} from './storageManag'
 
+
+let storageProject = [];
+
+
+
 class Project{
-    constructor(name) {
-        this.name = name,
+    constructor(title) {
+        this.title = title,
         this.id = crypto.randomUUID()
         this.tasks = []
     }
 
     addTask()
     {
-        console.log(this.name)
+        console.log(this.title)
         //tasks.js
     }
 
     deleteSelf()
     {
+        console.log(this.id)
         removeProjectFromStorage(this.id)
     }
 
-    changeName(newName)
+    changeTitle(newTitle)
     { 
-        this.name = newName 
+        this.title = newTitle 
     }
 
     static restoreProjectMethods(item)
     {
-        return Object.assign(new Project, item)
+        return Object.assign(new Project, item) //+ chiarezza //maybe??
     }
 
 }
 
 
 
-export default Project
+export { Project, storageProject }
