@@ -1,4 +1,4 @@
-import {removeProjectFromStorage} from './storageManag'
+import {removeProjectFromStorage, changeTitleInMemory} from './storageManag'
 
 
 let storageProject = [];
@@ -19,14 +19,15 @@ class Project{
     }
 
     deleteSelf()
-    {
-        console.log(this.id)
+    { 
         removeProjectFromStorage(this.id)
     }
 
     changeTitle(newTitle)
     { 
         this.title = newTitle 
+        changeTitleInMemory(this.id, newTitle)
+        //changeInMemory(newTitle)
     }
 
     static restoreProjectMethods(item)

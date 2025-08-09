@@ -2,9 +2,9 @@ class Tasks {
     constructor(title, description, dueDate, priority, )
     {
         this.title = title
-        this.id = crypto.randomUUID()
+        this.id = 'task' + crypto.randomUUID()
         this.description = description
-        this.dueDate
+        this.dueDate = dueDate
         this.priority = priority
         this.checked = false
         this.open = false

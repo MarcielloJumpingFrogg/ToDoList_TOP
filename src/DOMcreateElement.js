@@ -25,38 +25,63 @@ function inputCreator(placeholder, className, container)
 function buttonsOfProject(title, container){
     buttonCreator(title, 'projectFilterButton', container)
     buttonCreator('del', 'projectDeleteButton', container)
-    buttonCreator('edit', 'editProjectName', container)
+    buttonCreator('edit', 'toggleInterfaceChangeTitle', container)
 }
 
 
-function editNameInput(container)
+function editNameInput(container, originalContainer)
 {
+    console.log(originalContainer.children[0].textContent)
+    inputCreator(originalContainer.children[0].textContent, 'inputEditProjectName', container)
     buttonCreator('Submit', 'submitNewNameBtn', container)
-    inputCreator('New Project Name', 'inputEditProjectName', container)
 }
 
 
 function editNamePopUp(container)
 {
     const newNamePopUp = document.createElement('div')
+    newNamePopUp.classList.add('newTitleInterface')
     newNamePopUp.classList.add('hidden')
-    editNameInput(newNamePopUp)
+    editNameInput(newNamePopUp, container)
 
     container.appendChild( newNamePopUp)
 } 
 
+function addGroupToPage(aaa) {
+    const containerForEverything = document.createElement('div')
+
+    containerForEverything.classList.add('projectListContainer')
+
+    const page = document.getElementById('projectContainer')
+    containerForEverything.appendChild(aaa)
+
+    page.appendChild(containerForEverything)
+
+}
 
 
 function createProjectInList(title, id, container)
 {
     const div = document.createElement('div') 
+    div.classList.add('buttonContainer')
     div.dataset.id = id 
     
     buttonsOfProject(title, div)
-
     editNamePopUp(div) 
+    
+    
 
-    container.appendChild(div)
+    
+    
+    
+    container.appendChild(div) 
+    
+    addGroupToPage(div.cloneNode(true))
+    
+    
+    
+
+
     reloadButton()
 }
 

@@ -76,17 +76,54 @@ body{
     max-height: 50%; 
 }
 
-#list{
+#listOfProjects{
     display: flex;
     flex-direction: column;
     align-items: stretch; 
     gap: 5px;
     max-height: 100%;
-    overflow: scroll;
+    overflow:visible;
+
 }
 
-#list div *{
-    margin: 2px;
+.newTitleInterface{
+    position: absolute; 
+    top: -280%;
+    z-index: 5;
+    background-color: rgba(0, 72, 100, 0.9);
+    width: 250%; 
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    border: solid 1px gray;
+}
+
+.newTitleInterface > *{
+    border-radius: 5px;
+    margin-inline: 5px;
+    border: solid black 1px;
+    font-size: 0.8rem;
+}
+
+.newTitleInterface input{
+    width: 60%;
+    background-color: aliceblue;
+    text-align: center;
+
+}
+
+.submitNewNameBtn{
+    width: 20%;
+}
+
+.buttonContainer{
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+}
+
+.buttonContainer button {
+    margin: 2px; 
 }
 
 .hidden {
@@ -135,16 +172,6 @@ body{
 }
 
 
-@keyframes rainbow { 
-	    0% { background-color: red; }
-	    14% { background-color: orange; }
-	    28% { background-color: yellow; }
-	    42% { background-color: green; }
-	    57% { background-color: blue; }
-	    71% { background-color: indigo; }
-	    85% { background-color: violet; }
-	    100% { background-color: red; }
-	}
 
 #submitNewProject {
     display: block;
@@ -159,9 +186,7 @@ body{
     background: linear-gradient(to left, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 50% ) right;
     background-size: 200%; 
 
-    transition: background-position 0.3s linear, transform 0.3s linear;
-    
-    transition-timing-function: linear; 
+    transition: 0.3s linear;
     
 }
 
@@ -170,12 +195,6 @@ body{
     color: white;
     background-position: left;
     transform: scale(1.1); 
-    animation: rainbow 3s linear infinite;
-    animation-delay: 0.3s;
-    
-
-    
-
 } 
 
 #test {
@@ -183,4 +202,91 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+
+.newTaskForGeneralPopUp{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 50%;
+    background-color: lightblue;
+    
+}
+
+.containerFornewtask{ 
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: flex ;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10000;
+}
+
+
+
+.containerFornewtask label{
+    font-size: 1.3rem;
+    
+}
+
+.containerFornewtask input{
+    text-align: center;
+    font-size: 1.3rem;
+    width: 50%;
+    
+}
+
+.containerFornewtask div{
+    width: 50%;
+    display: flex;
+
+    justify-items: stretch;
+
+}
+
+.containerFornewtask select{
+    background-color: rgb(182, 133, 228); 
+}
+
+#priorityNewTask, #projectDestination{
+    width: 100%;
+    display: flex;
+}
+
+
+
+option {
+    width: 100%;
+    text-align: center;
+}
+
+#descriptionNewTask{
+    
+    height: 120px;
+}
+
+
+#projectContainer{
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.projectListContainer{
+    width: 100%;
+    background-color: white;
+    padding: 50px;
+    z-index: -1;
+}
+
+.projectListContainer .projectFilterButton{
+    background-color: rgba(255, 255, 255, 0);
 }

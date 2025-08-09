@@ -32,7 +32,7 @@ function addToProjectsArray(item)
 
 function loadSavedContentIntoMemory()
 {
-    for(let i = 0; i < localStorage.length; i++)
+    for(let i = 1; i < localStorage.length; i++)
     {
         const convertToObject = JSON.parse(eachLocalStorageItem(i))
         addToProjectsArray(convertToObject)
@@ -53,3 +53,20 @@ export default function()
     initialLoadDom()       //fixing
 }
 
+/* 
+    onNewTask   carico i possibli projects sulle options 
+        i projects sono la destinazione 
+
+        mi serve un  nuovo pulsante sui progetti che mi permetta di:
+            creare nuove task
+            espandere il menu 
+        
+        mettere immagini al posto di 'del' e 'edit'
+
+        filter/sortBy
+        date
+
+
+        GENERATE DEFAULT CONTENT MADONNA    
+
+*/

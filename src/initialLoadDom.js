@@ -24,7 +24,6 @@ export default function()
 { 
     for(let i = 1; i < storageProject.length; i++)
     { 
-        console.log(page)
         createProjectInList(storageProject[i].title, storageProject[i].id, page)
     }
 }

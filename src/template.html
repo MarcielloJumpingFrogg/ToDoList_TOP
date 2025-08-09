@@ -21,6 +21,37 @@
                         <option value="priority" autoconplete="off">Priority</option> 
                     </select>
                 </div>
+                <div id="newTaskForGeneralPopUp" class="hidden newTaskForGeneralPopUp"> 
+                    <div class="containerFornewtask">
+
+                        <div>
+                            <label for="projectDestination">Project: </label>
+                            <select name="projectDestination" id="projectDestination">
+                                <option value="destinationGeneral" data-id="1">General</option>
+                            </select>
+                        </div>
+                    
+                        <label for="titleNewTask">Title: </label>
+                        <input type="text" name="titleNewTask" id="titleNewTask"> 
+                    
+                        <label for="dateNewTask">Due Date: </label>
+                        <input type="date" name="dateNewTask" id="dateNewTask"> 
+                
+                        <div>
+                            <label for="priorityNewTask">Priotiry: </label>
+                            <select name="priorityNewTask" id="priorityNewTask">
+                                <option value="lowPriority">Low</option>
+                                <option value="mediumPriority">Medium</option>
+                                <option value="highPriority">High</option>
+                            </select> 
+                        </div>
+
+                        <label for="descriptionNewTask">Description: </label> <br>
+                        <input type="text" name="descriptionNewTask" id="descriptionNewTask">
+                            
+                        
+                        </div>
+                    </div>
             </div> 
 
             <div id="createdProjects">
@@ -33,6 +64,11 @@
             </div>
         </div> 
         
+
+        <div id="projectContainer">
+
+        </div>
+
 
         <div id="popUpScreenNewProject" class="hidden">
             <div>
