@@ -47,17 +47,35 @@ function editNamePopUp(container)
     container.appendChild( newNamePopUp)
 } 
 
-function addGroupToPage(aaa) {
+function addGroupToPage(div) {
     const containerForEverything = document.createElement('div')
 
     containerForEverything.classList.add('projectListContainer')
 
     const page = document.getElementById('projectContainer')
-    containerForEverything.appendChild(aaa)
+    containerForEverything.appendChild(div)
 
     page.appendChild(containerForEverything)
 
 }
+
+
+
+function addProjectToTaskSelection(title, id)
+{
+    const projectSelector = document.getElementById('projectDestination')
+
+    const newOption = document.createElement('option')
+
+    newOption.textContent = title
+
+    newOption.dataset.id = id
+
+    projectSelector.appendChild(newOption) 
+}
+
+
+
 
 
 function createProjectInList(title, id, container)
@@ -79,7 +97,7 @@ function createProjectInList(title, id, container)
     addGroupToPage(div.cloneNode(true))
     
     
-    
+    addProjectToTaskSelection(title, id)
 
 
     reloadButton()

@@ -13,6 +13,10 @@ const list = document.getElementById('listOfProjects')
 const newTask = document.getElementById('newTask')
 const newTaskInterface = document.getElementById('newTaskForGeneralPopUp')
 
+const submitNewTask = document.getElementById('submitNewTask')
+
+const optionList = document.getElementById('projectDestination') 
+
 
 
 
@@ -221,6 +225,62 @@ function findItemInObject(parentId) {
 
 newTask.onclick = function () {
     toggleVisibility(newTaskInterface)
+} 
+
+
+
+function getAllNewTaskData() {
+    const getDestination = getDestinationProject()
+
+    const taskTitle = getTaskTitle()
+
+    const dueDateNewTask = getDueDate()
+
+    console.log(getDestination, taskTitle, dueDateNewTask)
+}
+
+
+
+
+function getDestinationProject()
+{
+    return optionList[optionList.selectedIndex].dataset.id
+}
+
+function getTaskTitle() {
+    return document.getElementById('titleNewTask').value
+}
+
+
+function getDueDate() {
+    return document.getElementById('dateNewTask').value
+}
+
+function getPriority() {
+    const priority = document.getElementById('priorityNewTask')
+    const val = priority[priority.selectedIndex].value
+
+    
+}
+
+
+
+submitNewTask.onclick = function() {
+    
+    getAllNewTaskData()
+    
+
+    //getAllNewTaskData
+    
+    //getTitle
+
+    //getDueDate
+
+    //getPriority
+
+    //get Description
+
+    //send All to project
 }
 
 
