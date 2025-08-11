@@ -1,6 +1,7 @@
 import { Project, storageProject } from "./Project";
-import { createProjectInStorage } from "./storageManag";
+import { createProjectInStorage , addTaskToProject} from "./storageManag";
 import { createProjectInList } from "./DOMcreateElement";
+import Tasks from "./task";
 
 
 
@@ -133,8 +134,7 @@ function deleteFromStorage(project) {
 
 function loadDivs()
 {
-    const list = document.getElementById('listOfProjects')
-    console.log(list)
+    const list = document.getElementById('listOfProjects') 
     
     const div = list.querySelectorAll('[data-id]') 
     div.forEach(element => {
@@ -236,7 +236,13 @@ function getAllNewTaskData() {
 
     const dueDateNewTask = getDueDate()
 
-    console.log(getDestination, taskTitle, dueDateNewTask)
+    const priority = getPriority()
+
+    const description = getDescription()
+
+    const newTask = new Tasks(taskTitle, description, dueDateNewTask, priority)
+
+    addTaskToProject(newTask, getDestination)
 }
 
 
@@ -260,7 +266,11 @@ function getPriority() {
     const priority = document.getElementById('priorityNewTask')
     const val = priority[priority.selectedIndex].value
 
-    
+    return val
+}
+
+function getDescription() {
+    return document.getElementById('descriptionNewTask').value
 }
 
 

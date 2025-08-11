@@ -12,10 +12,9 @@ class Project{
         this.tasks = []
     }
 
-    addTask()
+    addTask(task)
     {
-        console.log(this.title)
-        //tasks.js
+        this.tasks.push(task)
     }
 
     deleteSelf()
