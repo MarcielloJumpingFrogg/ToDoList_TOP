@@ -5,13 +5,13 @@ import { Project } from "./Project";
 const projectListContainer = document.getElementById('listOfProjects')
 
 
-function buttonCreator (text, className, container)
+function buttonCreator (text, className)
 {
     const button = document.createElement('button')
     button.textContent = text 
     button.classList.add(className)
 
-    container.appendChild(button)
+    return button
 }
 
 function inputCreator(placeholder, className, container)
@@ -20,21 +20,21 @@ function inputCreator(placeholder, className, container)
     input.placeholder = placeholder
     input.classList.add(className)
 
-    container.appendChild(input)
+    return input
 }
 
 
 function buttonsOfProject(title, container){
-    buttonCreator(title, 'projectFilterButton', container)
-    buttonCreator('del', 'projectDeleteButton', container)
-    buttonCreator('edit', 'toggleInterfaceChangeTitle', container)
+    container.appendChild(buttonCreator(title, 'projectFilterButton'))
+    container.appendChild(buttonCreator('del', 'projectDeleteButton'))
+    container.appendChild(buttonCreator('edit', 'toggleInterfaceChangeTitle'))
 }
 
 
 function editNameInput(container, originalContainer)
 {
-    inputCreator(originalContainer.children[0].textContent, 'inputEditProjectName', container)
-    buttonCreator('Submit', 'submitNewNameBtn', container)
+    container.appendChild(inputCreator(originalContainer.children[0].textContent, 'inputEditProjectName'))
+    container.appendChild(buttonCreator('Submit', 'submitNewNameBtn'))
 }
 
 
@@ -60,7 +60,7 @@ function addGroupToPage(div, id) {
     containerForEverything.appendChild(div)
 
     
-    containerForEverything.appendChild(createTaskMenu(id))
+    div.after(createTaskMenu(id))
     
     page.appendChild(containerForEverything)
 
@@ -74,7 +74,9 @@ function createText(content) {
 
 
 function createCheckBox () {
-    const checkBox = document.createElement('checkbox')
+    const checkBox = document.createElement('input')
+    checkBox.type = 'checkbox';
+    checkBox.name = 'taskCheck'
     return checkBox
 }
 
@@ -116,12 +118,17 @@ function createTaskElement(task) {
     const div = document.createElement('div')
     div.dataset.id = task.id;
 
-    div.appendChild(createText(task.title))
-    div.appendChild(createText(task.dueDate))
-    div.appendChild(createText(task.priority))
-    div.appendChild(createCheckBox())
-    //div.appendChild(createDeleteElementTask())
-    div.appendChild(openTask())
+    const upperSection = document.createElement('div')
+    upperSection.classList.add('upperContainer')
+
+
+    upperSection.appendChild(createText(task.title))
+    upperSection.appendChild(createText(task.dueDate))
+    upperSection.appendChild(createText(task.priority))
+    upperSection.appendChild(createCheckBox())
+    upperSection.appendChild(openTask())
+
+    div.appendChild(upperSection)
 
     div.appendChild(createDropDownSection(task.description))
 
@@ -132,6 +139,7 @@ function createTaskElement(task) {
 
 function createTaskMenu(projectId) {
     const taskContainer = document.createElement('div')
+    taskContainer.classList.add('taskContainer')
     const project = findProjectInStorageById(projectId)
 
     for(let i = 0; i < project.tasks.length; i++)
@@ -160,23 +168,23 @@ function addProjectToTaskSelection(title, id)
 
 
 
-
-
-function createProjectInList(title, id, container)
-{
-    const div = document.createElement('div') 
+function createProjectButtons (title, id) {
+    const div = document.createElement('div')
     div.classList.add('buttonContainer')
-    div.dataset.id = id 
-    
+    div.dataset.id = id
+
     buttonsOfProject(title, div)
-    editNamePopUp(div) 
-    
-    
-//addTasks to this 
-    container.appendChild(createTaskMenu(id))
-    //newOption.appendChild(createTaskMenu(id))
-    
-    
+    editNamePopUp(div)
+
+    return div
+}
+
+
+
+
+function createProjectInPage(title, id, container)
+{
+    const div = createProjectButtons(title, id) 
     
     container.appendChild(div) 
     
@@ -189,4 +197,4 @@ function createProjectInList(title, id, container)
     reloadButton()
 }
 
-export {createProjectInList}
+export {createProjectInPage}

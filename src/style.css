@@ -290,3 +290,26 @@ option {
 .projectListContainer .projectFilterButton{
     background-color: rgba(255, 255, 255, 0);
 }
+
+
+.taskContainer {
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+} 
+
+.taskContainer div {
+    height: 30px;
+}
+
+.upperContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.dropDownMenu {
+    height: 0%;
+    overflow: hidden;
+    
+}

@@ -1,6 +1,6 @@
 import { Project, storageProject } from "./Project";
 import { createProjectInStorage , addTaskToProject} from "./storageManag";
-import { createProjectInList } from "./DOMcreateElement";
+import { createProjectInPage } from "./DOMcreateElement";
 import Tasks from "./task";
 
 
@@ -201,7 +201,7 @@ submitNewProject.onclick = function()
 
     const obj = findItemInObject(id)
     
-    createProjectInList(obj.title, obj.id, list)
+    createProjectInPage(obj.title, obj.id, list)
     
     
     

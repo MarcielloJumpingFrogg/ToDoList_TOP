@@ -1,5 +1,5 @@
 import { storageProject } from "./Project"; 
-import { createProjectInList } from "./DOMcreateElement";
+import { createProjectInPage } from "./DOMcreateElement";
 
 const page = document.getElementById('listOfProjects')
 
@@ -24,6 +24,6 @@ export default function()
 { 
     for(let i = 1; i < storageProject.length; i++)
     { 
-        createProjectInList(storageProject[i].title, storageProject[i].id, page)
+        createProjectInPage(storageProject[i].title, storageProject[i].id, page)
     }
 }
