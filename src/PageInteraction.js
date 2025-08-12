@@ -23,7 +23,8 @@ const optionList = document.getElementById('projectDestination')
 
 
 
-const fullList = [] 
+const fullList = []         
+//if i find in fullList the id of the parent of the task, then i can append the task to the .taskList element and make it deletable togheter with the actual project
 
 
 class Container {
@@ -31,7 +32,7 @@ class Container {
     {
         this.container = container
         this.id = this.container.dataset.id
-        this.loaded = false
+        this.loaded = false 
     }
 
     addToList()
@@ -64,6 +65,8 @@ class Container {
         console.log('filtering')
     }
 
+    
+
     loadEventListener()
     {
         if(!this.loaded)
@@ -71,6 +74,26 @@ class Container {
             eventListenerAdder(this) 
             this.loaded = true
         }
+    }
+}
+
+class ProjectOnPage extends Container {
+    constructor (container, id, loaded) {
+        super(container, id, loaded) ;
+        this.taskList = []
+    }
+
+    addTaskToProject(newTask) {
+        this.taskList.push(newTask)
+        //pass task through task.taskMethodLoader (from task.js)
+    }
+
+    removeTaskFromProject() {
+        //i am not sure if this is supposed to stay here, BUUUUUT per ora lo lascio, se non altro per avere un punto di riferimento per cosa mi manca i guess? idk im tired
+    }
+
+    toggleDropDownMenu() {
+        // this.toggleDropDownMenu (=> {toggle(dropDownMenuClosed; toggle(dropDownMenuOpen))})
     }
 }
 
@@ -248,6 +271,10 @@ function getAllNewTaskData() {
 
 
 
+
+
+
+
 function getDestinationProject()
 {
     return optionList[optionList.selectedIndex].dataset.id
@@ -277,31 +304,21 @@ function getDescription() {
 
 submitNewTask.onclick = function() {
     
-    getAllNewTaskData()
-    
-
-    //getAllNewTaskData
-    
-    //getTitle
-
-    //getDueDate
-
-    //getPriority
-
-    //get Description
-
-    //send All to project
+    getAllNewTaskData() 
 }
 
 
 
 function reloadButton()
 { 
-    
     loadDivs()
 }
 
 
+
+function loadTaskButtons() {
+
+}
 
 
 

@@ -66,8 +66,9 @@ function addGroupToPage(div, id) {
 
 }
 
-function createText(content) {
+function createText(content, className) {
     const text = document.createElement('p')
+    text.classList.add(className)
     text.textContent = content
     return text
 }
@@ -106,7 +107,7 @@ function createDescription(description) {
 
 function createDropDownSection (description) {
     const div = document.createElement('div')
-    div.classList.add('dropDownMenu') 
+    div.classList.add('dropDownMenuClosed') 
 
     div.appendChild(createDescription(description))
 
@@ -117,14 +118,15 @@ function createDropDownSection (description) {
 function createTaskElement(task) {
     const div = document.createElement('div')
     div.dataset.id = task.id;
+    div.classList.add('task')
 
     const upperSection = document.createElement('div')
     upperSection.classList.add('upperContainer')
 
 
-    upperSection.appendChild(createText(task.title))
-    upperSection.appendChild(createText(task.dueDate))
-    upperSection.appendChild(createText(task.priority))
+    upperSection.appendChild(createText(task.title, 'title'))
+    upperSection.appendChild(createText(task.dueDate, 'dueDate'))
+    upperSection.appendChild(createText(task.priority, 'dueDate'))
     upperSection.appendChild(createCheckBox())
     upperSection.appendChild(openTask())
 

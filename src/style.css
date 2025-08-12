@@ -299,17 +299,40 @@ option {
     gap: 5px;
 } 
 
-.taskContainer div {
-    height: 30px;
+.task {
+    display: flex;
+    flex-direction: column; 
+    
+    background-color: rgb(138, 138, 138);
+    padding: 20px;
 }
+
+
 
 .upperContainer {
     display: flex;
+    height: 50px;
     justify-content: space-around;
 }
 
-.dropDownMenu {
-    height: 0%;
-    overflow: hidden;
+.dropDownMenuClosed {
     
+    text-align: center;
+    overflow: hidden;
+
+    height: 0;
+    
+}
+
+
+.dropDownMenuOpen {
+    text-align: center;
+    overflow: auto;
+    
+}
+
+.test {
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
 }
