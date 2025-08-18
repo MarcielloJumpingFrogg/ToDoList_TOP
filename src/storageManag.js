@@ -1,4 +1,5 @@
 import {Project, storageProject} from "./Project";
+import { createTaskElement } from "./DOMcreateElement";
 
 const page = document.getElementById('listOfProjects')
 
@@ -47,9 +48,20 @@ function addTaskToProject(task, projectId) {
         
         localStorage.setItem(projectId, JSON.stringify(foundProject))
 
+        const projectById = findProjectWithId(projectId)
+
+        projectById.appendChild(createTaskElement(task))
+
+        //add to the dom element (project with the id)
     }
 }
 
+
+function findProjectWithId(id) {
+    const projectContainer = document.getElementById('projectContainer')
+
+    return projectContainer.querySelector(`[data-id="${id}"]`)
+}
 
 
 export {removeProjectFromStorage, createProjectInStorage, changeTitleInMemory, addTaskToProject, findProjectInStorageById}

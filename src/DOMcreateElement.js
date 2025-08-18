@@ -1,4 +1,4 @@
-import {reloadButton} from "././PageInteraction";
+import {reloadButton, addToListOfProjects} from "././PageInteraction";
 import { findProjectInStorageById } from "./storageManag";
 import { Project } from "./Project";
 
@@ -55,14 +55,20 @@ function addGroupToPage(div, id) {
     containerForEverything.classList.add('projectListContainer')
 
     
+    const toggleTasksVisibility = buttonCreator('><', 'toggleTaskVisibility')
+    div.appendChild(toggleTasksVisibility)
     
+
     const page = document.getElementById('projectContainer')
     containerForEverything.appendChild(div)
+
+    
 
     
     div.after(createTaskMenu(id))
     
     page.appendChild(containerForEverything)
+    addToListOfProjects(containerForEverything)
 
 }
 
@@ -141,6 +147,8 @@ function createTaskElement(task) {
 
 function createTaskMenu(projectId) {
     const taskContainer = document.createElement('div')
+    const newTask = buttonCreator('New Task', 'newTaskButton')
+    taskContainer.appendChild(newTask)
     taskContainer.classList.add('taskContainer')
     const project = findProjectInStorageById(projectId)
 
@@ -187,10 +195,10 @@ function createProjectButtons (title, id) {
 function createProjectInPage(title, id, container)
 {
     const div = createProjectButtons(title, id) 
+    addGroupToPage(div.cloneNode(true), id)
     
     container.appendChild(div) 
     
-    addGroupToPage(div.cloneNode(true), id)
     
     
     addProjectToTaskSelection(title, id)
@@ -199,4 +207,4 @@ function createProjectInPage(title, id, container)
     reloadButton()
 }
 
-export {createProjectInPage}
+export {createProjectInPage, createTaskElement}

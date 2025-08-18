@@ -10,6 +10,7 @@ const newProjectPopUp = document.getElementById('popUpScreenNewProject')
 
 
 const list = document.getElementById('listOfProjects')
+const proj = document.getElementById('projectContainer')
 
 const newTask = document.getElementById('newTask')
 const newTaskInterface = document.getElementById('newTaskForGeneralPopUp')
@@ -23,7 +24,8 @@ const optionList = document.getElementById('projectDestination')
 
 
 
-const fullList = []         
+const fullList = []        
+const listOfProjects = [] 
 //if i find in fullList the id of the parent of the task, then i can append the task to the .taskList element and make it deletable togheter with the actual project
 
 
@@ -41,12 +43,12 @@ class Container {
     }
 
     deleteSelf()
-    {
-        list.removeChild(this.container)
+    { 
+        deleteFromPageWithId(this.id)
         deleteFromStorage(this.id)
     }
 
-    toggleChangeNameVisibility()
+    toggleChangeNameVisibility() 
     {
         toggleVisibility(editInterface(this.container))
     }
@@ -78,8 +80,8 @@ class Container {
 }
 
 class ProjectOnPage extends Container {
-    constructor (container, id, loaded) {
-        super(container, id, loaded) ;
+    constructor (container) {
+        super(container) ;
         this.taskList = []
     }
 
@@ -93,21 +95,54 @@ class ProjectOnPage extends Container {
     }
 
     toggleDropDownMenu() {
-        // this.toggleDropDownMenu (=> {toggle(dropDownMenuClosed; toggle(dropDownMenuOpen))})
+        toggleDropDownVisibility(this.container)
+    }
+
+    newTask() {
+        toggleVisibility(newTaskInterface)
+        changeProjectDestination(this.id)
     }
 }
 
 
-function eventListenerAdder(item){
-    item.container.addEventListener('click', function(){
+function addToListOfProjects(project) {
+
+    listOfProjects.push(new ProjectOnPage(project))
+    listOfProjects.forEach( element => {
+        if(!element.loaded) 
+        {
+            element.loadEventListener()
+        }
+    })
+}
+
+
+
+function eventListenerAdder(item){ 
+    item.container.addEventListener('click', function(){ 
+        console.log(event.target.classList)
         activateCorrispondingFunctions(event.target.classList, item)
     })
 }
 
 
+function deleteFromPageWithId(id) {
+    const idInstance = findIdInPage(id)
+
+    idInstance.forEach(element => {
+        element.parentElement.removeChild(element)
+    });
+}
+
+function findIdInPage(id) {
+    const allIdInstance = document.querySelectorAll(`[data-id="${id}"]`)
+    console.log(allIdInstance)
+    return allIdInstance
+}
+
+
 function activateCorrispondingFunctions(element, parent)
 { 
-
     if(element == 'projectFilterButton')
     {
         parent.filter()
@@ -124,8 +159,31 @@ function activateCorrispondingFunctions(element, parent)
     {
         parent.changeTitle()
     }
+    else if( element == 'newTaskButton') 
+    {
+        parent.newTask()
+    }
+    else if (element == 'openTask') 
+    {
+        toggleDropDownVisibility(element, parent) 
+        //dovrebbe essere un metodo della task, non del parent
+        //se io dico al parent di attivarla non sa quale task in particolare mi sto riferendo
+        //posso usarlo per aprire il menu con tutte le tasks
+    }
 }
 
+
+function changeProjectDestination(project) {
+    const projectDestination = document.getElementById('projectDestination')
+    const test = projectDestination.querySelector(`[data-id="${project}"`)
+    test.selected = true;
+}
+
+
+function toggleDropDownVisibility(item, parent) {
+    console.log(item)
+    //item.classList.toggle('dropDownMenuOpen')
+}
 
 
 
@@ -176,6 +234,11 @@ function loadDivs()
     
     }); 
 
+}
+
+
+function loadProjects() {
+    
 }
 
 
@@ -248,6 +311,7 @@ function findItemInObject(parentId) {
 
 newTask.onclick = function () {
     toggleVisibility(newTaskInterface)
+    changeProjectDestination(1)
 } 
 
 
@@ -322,4 +386,5 @@ function loadTaskButtons() {
 
 
 
-export {reloadButton}
+
+export {reloadButton, addToListOfProjects}

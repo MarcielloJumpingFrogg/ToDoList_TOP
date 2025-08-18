@@ -90,8 +90,10 @@ body{
     position: absolute; 
     top: -280%;
     z-index: 5;
+    left: 50%;
+    transform: translate(-15%);
     background-color: rgba(0, 72, 100, 0.9);
-    width: 250%; 
+    width: 500px; 
     padding: 15px;
     text-align: center;
     border-radius: 10px;
@@ -213,7 +215,7 @@ body{
     width: 30%;
     height: 50%;
     background-color: lightblue;
-    
+    z-index: 10;
 }
 
 .containerFornewtask{ 
@@ -327,12 +329,17 @@ option {
 
 .dropDownMenuOpen {
     text-align: center;
-    overflow: auto;
-    
+    overflow:visible;
+    height: auto;
 }
 
 .test {
     display: flex;
     flex-direction: column;
     background-color: grey;
+}
+
+#projectContainer{
+    overflow: scroll;
+    z-index: 0;
 }
