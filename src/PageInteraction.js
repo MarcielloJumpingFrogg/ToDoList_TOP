@@ -94,8 +94,8 @@ class ProjectOnPage extends Container {
         //i am not sure if this is supposed to stay here, BUUUUUT per ora lo lascio, se non altro per avere un punto di riferimento per cosa mi manca i guess? idk im tired
     }
 
-    toggleDropDownMenu() {
-        toggleDropDownVisibility(this.container)
+    toggleTaskListVisibility() {
+        visibilityTaskList(this.container)
     }
 
     newTask() {
@@ -121,7 +121,7 @@ function addToListOfProjects(project) {
 function eventListenerAdder(item){ 
     item.container.addEventListener('click', function(){ 
         console.log(event.target.classList)
-        activateCorrispondingFunctions(event.target.classList, item)
+        activateCorrispondingFunctions(event.target, item)
     })
 }
 
@@ -136,39 +136,41 @@ function deleteFromPageWithId(id) {
 
 function findIdInPage(id) {
     const allIdInstance = document.querySelectorAll(`[data-id="${id}"]`)
-    console.log(allIdInstance)
     return allIdInstance
 }
 
 
-function activateCorrispondingFunctions(element, parent)
+function activateCorrispondingFunctions(target, parent)
 { 
-    if(element == 'projectFilterButton')
+    const targetClass = target.classList
+
+    if(targetClass == 'projectFilterButton')
     {
         parent.filter()
     }
-    else if( element == 'projectDeleteButton')
+    else if( targetClass == 'projectDeleteButton')
     {
         parent.deleteSelf()
     }
-    else if( element == 'toggleInterfaceChangeTitle')
+    else if( targetClass == 'toggleInterfaceChangeTitle')
     {
         parent.toggleChangeNameVisibility()
     }
-    else if( element == 'submitNewNameBtn')
+    else if( targetClass == 'submitNewNameBtn')
     {
         parent.changeTitle()
     }
-    else if( element == 'newTaskButton') 
+    else if( targetClass == 'newTaskButton') 
     {
         parent.newTask()
     }
-    else if (element == 'openTask') 
+    else if (targetClass == 'openTask') 
+    { 
+        toggleDropDownVisibility(target)
+    }
+    else if ( targetClass == 'toggleTaskVisibility')
     {
-        toggleDropDownVisibility(element, parent) 
-        //dovrebbe essere un metodo della task, non del parent
-        //se io dico al parent di attivarla non sa quale task in particolare mi sto riferendo
-        //posso usarlo per aprire il menu con tutte le tasks
+        parent.toggleTaskListVisibility()
     }
 }
 
@@ -180,11 +182,20 @@ function changeProjectDestination(project) {
 }
 
 
-function toggleDropDownVisibility(item, parent) {
-    console.log(item)
-    //item.classList.toggle('dropDownMenuOpen')
+function toggleDropDownVisibility(item) {
+    const container = item.parentElement.parentElement
+    const dropDownMenu = container.querySelector('.dropDownMenu')
+    
+    
+    dropDownMenu.classList.toggle('dropDownMenuOpen')
 }
 
+
+function visibilityTaskList(item) {
+    const taskContainer = item.querySelector('.taskContainer')
+    console.log(taskContainer)
+    taskContainer.classList.toggle('taskListHidden')
+}
 
 
 

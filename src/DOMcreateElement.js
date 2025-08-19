@@ -113,6 +113,7 @@ function createDescription(description) {
 
 function createDropDownSection (description) {
     const div = document.createElement('div')
+    div.classList.add('dropDownMenu')
     div.classList.add('dropDownMenuClosed') 
 
     div.appendChild(createDescription(description))

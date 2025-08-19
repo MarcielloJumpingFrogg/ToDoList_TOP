@@ -326,6 +326,11 @@ option {
     
 }
 
+.taskListHidden {
+    overflow: hidden;
+    height: 0;
+}
+
 
 .dropDownMenuOpen {
     text-align: center;
