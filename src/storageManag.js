@@ -49,8 +49,9 @@ function addTaskToProject(task, projectId) {
         localStorage.setItem(projectId, JSON.stringify(foundProject))
 
         const projectById = findProjectWithId(projectId)
+        const taskContainerOfProjectById = projectById.querySelector('.taskContainer')
 
-        projectById.appendChild(createTaskElement(task))
+        taskContainerOfProjectById.appendChild(createTaskElement(task))
 
         //add to the dom element (project with the id)
     }
