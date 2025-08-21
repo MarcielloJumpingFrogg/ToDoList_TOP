@@ -25,5 +25,9 @@ export default function()
     for(let i = 1; i < storageProject.length; i++)
     { 
         createProjectInPage(storageProject[i].title, storageProject[i].id, page)
+        for(let j = 0; j < storageProject[i].tasks.length; j++) 
+        {
+            //console.log(storageProject[i].tasks[j])
+        }
     }
 }

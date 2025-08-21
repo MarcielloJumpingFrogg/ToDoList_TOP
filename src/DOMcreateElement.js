@@ -136,6 +136,7 @@ function createTaskElement(task) {
     upperSection.appendChild(createText(task.priority, 'dueDate'))
     upperSection.appendChild(createCheckBox())
     upperSection.appendChild(openTask())
+    upperSection.appendChild(createDeleteElementTask())
 
     div.appendChild(upperSection)
 
@@ -148,8 +149,8 @@ function createTaskElement(task) {
 
 function createTaskMenu(projectId) {
     const taskContainer = document.createElement('div')
-    const newTask = buttonCreator('New Task', 'newTaskButton')
-    taskContainer.appendChild(newTask)
+    const newTaskButton = buttonCreator('New Task', 'newTaskButton')
+    taskContainer.appendChild(newTaskButton)
     taskContainer.classList.add('taskContainer')
     const project = findProjectInStorageById(projectId)
 

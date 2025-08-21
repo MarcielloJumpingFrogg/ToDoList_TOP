@@ -13,12 +13,14 @@ const list = document.getElementById('listOfProjects')
 const proj = document.getElementById('projectContainer')
 
 const newTask = document.getElementById('newTask')
-const newTaskInterface = document.getElementById('newTaskForGeneralPopUp')
+const newTaskInterface = document.getElementById('newTaskPopUp')
 
 const submitNewTask = document.getElementById('submitNewTask')
 
 const optionList = document.getElementById('projectDestination') 
 
+
+const closePopUp = document.getElementById('closePopUp')
 
 
 
@@ -85,14 +87,24 @@ class ProjectOnPage extends Container {
         this.taskList = []
     }
 
-    addTaskToProject(newTask) {
+    addTaskToProject(newTask) { 
         this.taskList.push(newTask)
         //pass task through task.taskMethodLoader (from task.js)
     }
 
-    removeTaskFromProject() {
+    removeTask(taskId) {
+        console.log(taskId)
+        console.log(this.taskList)
+        const taskInStorage = this.findTask(taskId)
+        console.log(taskInStorage)
         //i am not sure if this is supposed to stay here, BUUUUUT per ora lo lascio, se non altro per avere un punto di riferimento per cosa mi manca i guess? idk im tired
     }
+
+
+    findTask(taskId) {
+        return this.taskList.find(task => task.id === taskId)
+    }
+
 
     toggleTaskListVisibility() {
         visibilityTaskList(this.container)
@@ -105,9 +117,19 @@ class ProjectOnPage extends Container {
 }
 
 
+
+
 function addToListOfProjects(project) {
 
     listOfProjects.push(new ProjectOnPage(project))
+    
+    for(let i = 1; i < localStorage.length; i++) 
+    {
+        console.log(listOfProjects)
+        console.log(localStorage.getItem(localStorage.key(i)))
+        //listOfProjects[i].addTaskToProject((retrieveAllTasks(i)))
+    }
+
     listOfProjects.forEach( element => {
         if(!element.loaded) 
         {
@@ -116,6 +138,10 @@ function addToListOfProjects(project) {
     })
 }
 
+
+function retrieveAllTasks(i) {
+    //console.log(localStorage.getItem(localStorage.key(i)))
+}
 
 
 function eventListenerAdder(item){ 
@@ -171,6 +197,10 @@ function activateCorrispondingFunctions(target, parent)
     else if ( targetClass == 'toggleTaskVisibility')
     {
         parent.toggleTaskListVisibility()
+    } 
+    else if( targetClass == 'deleteTask')
+    {
+        parent.removeTask(target.parentNode.parentNode.dataset.id)
     }
 }
 
@@ -395,6 +425,11 @@ function loadTaskButtons() {
 
 }
 
+
+closePopUp.addEventListener('click', function() {
+    toggleVisibility(closePopUp.parentNode.parentNode)
+    
+})
 
 
 
