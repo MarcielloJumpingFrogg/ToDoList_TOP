@@ -58,7 +58,9 @@ function eachLocalStorageItem(index)
 function addToProjectsArray(item)
 {
     const restoredWithMethod = Project.restoreProjectMethods(item)
-    console.log(restoredWithMethod.tasks)
+    restoredWithMethod.tasks.forEach(task => {
+        restoredWithMethod
+    });
     storage.push(restoredWithMethod)
 }
 
