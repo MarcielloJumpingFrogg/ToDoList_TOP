@@ -1,7 +1,7 @@
 import {removeProjectFromStorage, changeTitleInMemory} from './storageManag'
 
 
-let storageProject = [];
+let storage = [];
 
 
 
@@ -38,4 +38,4 @@ class Project{
 
 
 
-export { Project, storageProject }
+export { Project, storage }

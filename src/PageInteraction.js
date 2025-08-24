@@ -1,4 +1,4 @@
-import { Project, storageProject } from "./Project";
+import { Project, storage } from "./Project";
 import { createProjectInStorage , addTaskToProject} from "./storageManag";
 import { createProjectInPage } from "./DOMcreateElement";
 import Tasks from "./task";
@@ -37,12 +37,40 @@ class Container {
         this.container = container
         this.id = this.container.dataset.id
         this.loaded = false 
+        this.taskList = []
+    } 
+
+
+
+    addTaskToProject(newTask) { 
+        this.taskList.push(newTask)
+        //pass task through task.taskMethodLoader (from task.js)
     }
 
-    addToList()
-    {
-        fullList.push(this.container)
+    removeTask(taskId) {
+        console.log(taskId)
+        console.log(this.taskList)
+        const taskInStorage = this.findTask(taskId)
+        console.log(taskInStorage)
+        //i am not sure if this is supposed to stay here, BUUUUUT per ora lo lascio, se non altro per avere un punto di riferimento per cosa mi manca i guess? idk im tired
     }
+
+    findTask(taskId) {
+        return this.taskList.find(task => task.id === taskId)
+    }
+
+    toggleTaskListVisibility() {
+        visibilityTaskList(this.container)
+    }
+
+    newTask() {
+        toggleVisibility(newTaskInterface)
+        changeProjectDestination(this.id)
+    }
+
+
+
+
 
     deleteSelf()
     { 
@@ -79,54 +107,16 @@ class Container {
             this.loaded = true
         }
     }
-}
-
-class ProjectOnPage extends Container {
-    constructor (container) {
-        super(container) ;
-        this.taskList = []
-    }
-
-    addTaskToProject(newTask) { 
-        this.taskList.push(newTask)
-        //pass task through task.taskMethodLoader (from task.js)
-    }
-
-    removeTask(taskId) {
-        console.log(taskId)
-        console.log(this.taskList)
-        const taskInStorage = this.findTask(taskId)
-        console.log(taskInStorage)
-        //i am not sure if this is supposed to stay here, BUUUUUT per ora lo lascio, se non altro per avere un punto di riferimento per cosa mi manca i guess? idk im tired
-    }
-
-
-    findTask(taskId) {
-        return this.taskList.find(task => task.id === taskId)
-    }
-
-
-    toggleTaskListVisibility() {
-        visibilityTaskList(this.container)
-    }
-
-    newTask() {
-        toggleVisibility(newTaskInterface)
-        changeProjectDestination(this.id)
-    }
-}
-
+} 
 
 
 
 function addToListOfProjects(project) {
 
-    listOfProjects.push(new ProjectOnPage(project))
+    listOfProjects.push(new Container(project))
     
     for(let i = 1; i < localStorage.length; i++) 
     {
-        console.log(listOfProjects)
-        console.log(localStorage.getItem(localStorage.key(i)))
         //listOfProjects[i].addTaskToProject((retrieveAllTasks(i)))
     }
 
@@ -146,7 +136,7 @@ function retrieveAllTasks(i) {
 
 function eventListenerAdder(item){ 
     item.container.addEventListener('click', function(){ 
-        console.log(event.target.classList)
+        //console.log(event.target.classList)
         activateCorrispondingFunctions(event.target, item)
     })
 }
@@ -243,7 +233,7 @@ function foundId(fullList, target)
 
 
 function findProject(project) {
-    return storageProject.find(name => name.id === project)
+    return storage.find(name => name.id === project)
 }
 
 
@@ -345,7 +335,7 @@ newProjectButtonInterface.onclick = function() {
 
 
 function findItemInObject(parentId) {
-    return storageProject.find(names => names.id === parentId)
+    return storage.find(names => names.id === parentId)
 } 
 
 

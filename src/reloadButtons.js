@@ -1,5 +1,5 @@
 import { removeProjectFromStorage } from "./storageManag"
-import { storageProject } from "./Project"
+import { storage } from "./Project"
 import loadPage from "./InitialPageLoading"
 
 //domManagement
@@ -23,7 +23,7 @@ function a()
             
             const parentId = (button.parentNode).dataset.id
 
-            const item = (storageProject.find(o => o.id === parentId))
+            const item = (storage.find(o => o.id === parentId))
 
             item.changeName('paolo')
 
