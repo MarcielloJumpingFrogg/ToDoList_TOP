@@ -198,6 +198,8 @@ function createProjectInPage(title, id, container)
 {
     const div = createProjectButtons(title, id) 
     addGroupToPage(div.cloneNode(true), id)
+    //should not be using div.cloneNode
+    // should make it a function that creates 2 diff sets of DOM elements
     
     container.appendChild(div) 
     
