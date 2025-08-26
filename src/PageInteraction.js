@@ -1,4 +1,4 @@
-import { Project, storage } from "./Project";
+import { Project, storage , findInStorage} from "./Project";
 import { createProjectInStorage , addTaskToProject, Container} from "./storageManag";
 import { createProjectInPage } from "./DOMcreateElement";
 import Tasks from "./task";
@@ -66,23 +66,16 @@ function eventListenerAdder(item){
 }
 
 
-function deleteFromPageWithId(id) {
-    const idInstance = findIdInPage(id)
-
-    idInstance.forEach(element => {
-        element.parentElement.removeChild(element)
-    });
-}
-
-function findIdInPage(id) {
-    const allIdInstance = document.querySelectorAll(`[data-id="${id}"]`)
-    return allIdInstance
-}
 
 
-function activateCorrispondingFunctions(target, parent)
+
+
+
+function activateCorrispondingFunctions(target)
 { 
     const targetClass = target.classList
+
+    const parent = findInStorage(target.parentNode.parentNode.dataset.id)
 
     if(targetClass == 'projectFilterButton')
     {
@@ -347,4 +340,4 @@ closePopUp.addEventListener('click', function() {
 
 
 
-export {reloadButton, addToListOfProjects}
+export {reloadButton, addToListOfProjects, activateCorrispondingFunctions}

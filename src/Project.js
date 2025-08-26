@@ -1,4 +1,6 @@
 import {removeProjectFromStorage, changeTitleInMemory} from './storageManag'
+import Tasks from './task'; 
+import { createProjectInPage } from './DOMcreateElement';
 
 
 let storage = [];
@@ -14,7 +16,8 @@ class Project{
 
     addTask(task)
     {
-        this.tasks.push(task)
+        //const restoredTask = Tasks.taskMethodRestore(task)
+        //this.tasks.push(restoredTask)
     }
 
     removeTask(taskId)
@@ -46,6 +49,13 @@ class Project{
     // THIS is because i am not sure how to implement interface interaction like PopUps 
 
 
+    createDomElement() 
+    {
+        createProjectInPage(this.title, this.id)
+        
+    }
+
+
     deleteSelf()
     { 
         removeProjectFromStorage(this.id)
@@ -69,15 +79,29 @@ class Project{
 
 function getContainer(id)
 { 
-    
     const page = document.querySelector(`[data-id="${id}"]`)
 }
 
 function findInStorage(id)
 {
-    return storage.find(project => project.id === id)
+    const thing = storage.find(project => project.id === id)
+    console.log(thing)
+    return thing
+}
+
+function findIdInPage(id) {
+    const allIdInstance = document.querySelectorAll(`[data-id="${id}"]`)
+    return allIdInstance
 }
 
 
+function deleteFromPageWithId(id) {
+    const idInstance = findIdInPage(id)
 
-export { Project, storage }
+    idInstance.forEach(element => {
+        element.parentElement.removeChild(element)
+    });
+}
+
+
+export { Project, storage , findInStorage}

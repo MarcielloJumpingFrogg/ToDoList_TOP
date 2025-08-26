@@ -40,7 +40,7 @@ class Tasks {
         //delete
     }
 
-    taskMethodReloader(item)
+    taskMethodRestore(item)
     {
         return Object.assign(new Tasks, item)
     }

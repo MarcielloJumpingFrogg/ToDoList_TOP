@@ -1,8 +1,64 @@
-import {reloadButton, addToListOfProjects} from "././PageInteraction";
+import {reloadButton, addToListOfProjects, activateCorrispondingFunctions} from "././PageInteraction";
 import { findProjectInStorageById } from "./storageManag";
-import { Project } from "./Project";
+import { findInStorage, Project } from "./Project";
 
 const projectListContainer = document.getElementById('listOfProjects')
+
+
+
+
+function createProjectInPage(title, id)
+{   
+    //title on one side
+    // the rest in another div
+    //title is divided in: 
+        // button for the filter section
+        // and plain text for the project side
+
+    const projectsOnFilter = document.getElementById('listOfProjects') 
+    const projectOnList = document.getElementById('projectContainer') 
+
+    //qua ho : crea pulsante per filtro
+    //         e crea scritta per progetto
+    //         + creo i pulsanti: delete, edit per entrambi (rinchiusi in un div)
+
+    
+    //addGroupToPage(div.cloneNode(true), id)
+
+    const filterSideContainers = containerForFilterSection(title)
+
+    const projectSectionContainers = containerForProjectSection(title)
+
+
+    filterSideContainers.dataset.id = id
+    projectSectionContainers.dataset.id = id
+
+
+
+    projectsOnFilter.appendChild(filterSideContainers)
+    projectOnList.appendChild(projectSectionContainers)
+
+    projectOnList.appendChild(createTaskMenu(id))
+
+    //should not be using div.cloneNode
+    // should make it a function that creates 2 diff sets of DOM elements
+    
+    
+    filterSideContainers.addEventListener('click' , function () {
+        console.log(event.target.parentElement.parentNode)
+        activateCorrispondingFunctions(event.target), findInStorage(event.target.parentElement.parentNode.dataset.id)
+        
+    })
+    
+    
+    addProjectToTaskSelection(title, id)
+
+
+    //reloadButton()
+}
+
+
+
 
 
 function buttonCreator (text, className)
@@ -12,23 +68,70 @@ function buttonCreator (text, className)
     button.classList.add(className)
 
     return button
+} 
+
+
+function containerForFilterSection(title)
+{ 
+    const container = document.createElement('div')
+
+    container.appendChild(buttonCreator(title, 'titleFilter'))
+
+    container.appendChild(createProjectButtons())
+
+    return container
 }
 
-function inputCreator(placeholder, className, container)
+
+function containerForProjectSection(title)
 {
-    const input = document.createElement('input')
-    input.placeholder = placeholder
-    input.classList.add(className)
+    const fullContainer = document.createElement('div')
 
-    return input
+    fullContainer.classList.add('projectListContainer')
+
+    fullContainer.appendChild(textSection(title))
+
+    const buttonContainer = createProjectButtons()
+    const toggleTaskListVisibility = buttonCreator('>', 'toggleTaskVisibility')
+    buttonContainer.appendChild(toggleTaskListVisibility)
+
+
+
+    fullContainer.appendChild(buttonContainer) 
+
+    return fullContainer
+
 }
 
 
-function buttonsOfProject(title, container){
-    container.appendChild(buttonCreator(title, 'projectFilterButton'))
-    container.appendChild(buttonCreator('del', 'projectDeleteButton'))
-    container.appendChild(buttonCreator('edit', 'toggleInterfaceChangeTitle'))
+function textSection(text)
+{ 
+    const p = document.createElement('p')
+    p.textContent = text
+    return p
+} 
+
+
+function createProjectButtons () {
+    const div = document.createElement('div')
+    div.classList.add('buttonContainer') 
+
+    createButtonsOfProject(div)
+    createEditNamePopUp(div)
+
+    return div
 }
+
+
+function createEditNamePopUp(container)
+{
+    const newNamePopUp = document.createElement('div')
+    newNamePopUp.classList.add('newTitleInterface')
+    newNamePopUp.classList.add('hidden')
+    editNameInput(newNamePopUp, container)
+
+    container.appendChild( newNamePopUp)
+} 
 
 
 function editNameInput(container, originalContainer)
@@ -38,15 +141,42 @@ function editNameInput(container, originalContainer)
 }
 
 
-function editNamePopUp(container)
+function inputCreator(placeholder, className)
 {
-    const newNamePopUp = document.createElement('div')
-    newNamePopUp.classList.add('newTitleInterface')
-    newNamePopUp.classList.add('hidden')
-    editNameInput(newNamePopUp, container)
+    const input = document.createElement('input')
+    input.placeholder = placeholder
+    input.classList.add(className)
 
-    container.appendChild( newNamePopUp)
-} 
+    return input
+}
+
+function createButtonsOfProject(container){ 
+    container.appendChild(buttonCreator('del', 'projectDeleteButton'))
+    container.appendChild(buttonCreator('edit', 'toggleInterfaceChangeTitle'))
+}
+
+function addProjectToTaskSelection(title, id)
+{
+    const projectSelector = document.getElementById('projectDestination')
+
+    const newOption = document.createElement('option')
+
+    newOption.textContent = title
+
+    newOption.dataset.id = id
+
+    
+
+    projectSelector.appendChild(newOption) 
+}
+
+
+
+
+
+
+
+
 
 function addGroupToPage(div, id) {
     const containerForEverything = document.createElement('div')
@@ -68,7 +198,8 @@ function addGroupToPage(div, id) {
     div.after(createTaskMenu(id))
     
     page.appendChild(containerForEverything)
-    addToListOfProjects(containerForEverything)
+    
+    //addToListOfProjects(containerForEverything) //wtf
 
 }
 
@@ -163,52 +294,14 @@ function createTaskMenu(projectId) {
 
 
 
-function addProjectToTaskSelection(title, id)
-{
-    const projectSelector = document.getElementById('projectDestination')
-
-    const newOption = document.createElement('option')
-
-    newOption.textContent = title
-
-    newOption.dataset.id = id
-
-    
-
-    projectSelector.appendChild(newOption) 
-}
-
-
-
-function createProjectButtons (title, id) {
-    const div = document.createElement('div')
-    div.classList.add('buttonContainer')
-    div.dataset.id = id
-
-    buttonsOfProject(title, div)
-    editNamePopUp(div)
-
-    return div
-}
 
 
 
 
-function createProjectInPage(title, id, container)
-{
-    const div = createProjectButtons(title, id) 
-    addGroupToPage(div.cloneNode(true), id)
-    //should not be using div.cloneNode
-    // should make it a function that creates 2 diff sets of DOM elements
-    
-    container.appendChild(div) 
-    
-    
-    
-    addProjectToTaskSelection(title, id)
 
 
-    reloadButton()
-}
+
+
+
 
 export {createProjectInPage, createTaskElement}

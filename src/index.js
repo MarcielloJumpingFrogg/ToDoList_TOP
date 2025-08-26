@@ -57,11 +57,11 @@ function eachLocalStorageItem(index)
 
 function addToProjectsArray(item)
 {
-    const restoredWithMethod = Project.restoreProjectMethods(item)
-    restoredWithMethod.tasks.forEach(task => {
-        restoredWithMethod
+    const restoredProject = Project.restoreProjectMethods(item)
+    restoredProject.tasks.forEach(task => {
+        restoredProject.addTask(task)
     });
-    storage.push(restoredWithMethod)
+    storage.push(restoredProject)
 }
 
 
@@ -71,6 +71,9 @@ function initialLoadDom()
     { 
         if (localStorage.getItem('general') != localStorage.key(i))
         {
+
+            storage[i].createDomElement()
+
             createProjectInPage(storage[i].title, storage[i].id, page)
             for(let j = 0; j < storage[i].tasks.length; j++) 
             {
