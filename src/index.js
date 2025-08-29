@@ -74,7 +74,7 @@ function initialLoadDom()
 
             storage[i].createDomElement()
 
-            createProjectInPage(storage[i].title, storage[i].id, page)
+            //createProjectInPage(storage[i].title, storage[i].id, page)
             for(let j = 0; j < storage[i].tasks.length; j++) 
             {
                 //console.log(storage[i].tasks[j])

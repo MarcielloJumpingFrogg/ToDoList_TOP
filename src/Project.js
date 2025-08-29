@@ -12,12 +12,13 @@ class Project{
         this.title = title,
         this.id = crypto.randomUUID()
         this.tasks = []
+        this.container 
     }
 
     addTask(task)
-    {
-        //const restoredTask = Tasks.taskMethodRestore(task)
-        //this.tasks.push(restoredTask)
+    { 
+        this.tasks.push(task)
+        console.log(this.tasks)
     }
 
     removeTask(taskId)
@@ -34,7 +35,7 @@ class Project{
 
     //see newTask
 
-    /* 
+    
     toggleTaskListVisibility() {
         visibilityTaskList(this.container)
     }
@@ -43,7 +44,7 @@ class Project{
         toggleVisibility(newTaskInterface)
         changeProjectDestination(this.id)
     }
-    */
+    
 
 
     // THIS is because i am not sure how to implement interface interaction like PopUps 
@@ -52,7 +53,8 @@ class Project{
     createDomElement() 
     {
         createProjectInPage(this.title, this.id)
-        
+        this.container = getContainer(this.id)
+        console.log(this.container)
     }
 
 
@@ -74,12 +76,21 @@ class Project{
         return Object.assign(new Project, item) //+ chiarezza //maybe??
     }
 
+
+    toggleChangeNameVisibility() 
+    { 
+        toggleVisibility(editInterface(this.container))
+    }
 }
 
 
 function getContainer(id)
 { 
-    const page = document.querySelector(`[data-id="${id}"]`)
+    const projectContainer = document.getElementById('projectContainer') 
+
+    const containerOnPage = projectContainer.querySelector(`[data-id="${id}"]`) 
+
+    return containerOnPage
 }
 
 function findInStorage(id)
@@ -102,6 +113,45 @@ function deleteFromPageWithId(id) {
         element.parentElement.removeChild(element)
     });
 }
+
+
+
+function eventListenerAdder(item){ 
+    item.container.addEventListener('click', function(){ 
+        //console.log(event.target.classList)
+        activateCorrispondingFunctions(event.target, item)
+    })
+}
+
+
+function editInterface(container) {
+    console.log( container)
+    return container.querySelector('.newTitleInterface')
+}
+
+
+
+function toggleVisibility(target){
+    target.classList.toggle('hidden')
+    target.classList.toggle('show')
+}
+
+
+
+
+function retrieveNewTitle(container) {
+    return container.querySelector('.inputEditProjectName').value
+}
+
+function retrieveOldTitle(container) {
+    return container.querySelector('.projectFilterButton')
+}
+
+
+/* function changeTitleInMemory(project, newTitle) {
+    findProject(project).changeTitle(newTitle)
+}
+ */
 
 
 export { Project, storage , findInStorage}

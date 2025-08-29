@@ -18,6 +18,10 @@ function createProjectInPage(title, id)
     const projectsOnFilter = document.getElementById('listOfProjects') 
     const projectOnList = document.getElementById('projectContainer') 
 
+    const projectContainer = document.createElement('div')
+
+    projectOnList.appendChild(projectContainer)
+
     //qua ho : crea pulsante per filtro
     //         e crea scritta per progetto
     //         + creo i pulsanti: delete, edit per entrambi (rinchiusi in un div)
@@ -36,15 +40,21 @@ function createProjectInPage(title, id)
 
 
     projectsOnFilter.appendChild(filterSideContainers)
-    projectOnList.appendChild(projectSectionContainers)
+    projectContainer.appendChild(projectSectionContainers)
 
-    projectOnList.appendChild(createTaskMenu(id))
+    projectContainer.appendChild(createTaskMenu(id))
 
     //should not be using div.cloneNode
     // should make it a function that creates 2 diff sets of DOM elements
     
     
     filterSideContainers.addEventListener('click' , function () {
+        console.log(event.target.parentElement.parentNode)
+        activateCorrispondingFunctions(event.target), findInStorage(event.target.parentElement.parentNode.dataset.id)
+        
+    })
+
+    projectSectionContainers.addEventListener('click' , function () {
         console.log(event.target.parentElement.parentNode)
         activateCorrispondingFunctions(event.target), findInStorage(event.target.parentElement.parentNode.dataset.id)
         

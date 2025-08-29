@@ -7,7 +7,7 @@ const page = document.getElementById('listOfProjects')
 
 
 
-
+/* 
 class Container {
     constructor(container)
     {
@@ -85,7 +85,7 @@ class Container {
         }
     }
 } 
-
+ */
 
 
 
@@ -152,4 +152,4 @@ function findProjectWithId(id) {
 }
 
 
-export {removeProjectFromStorage, createProjectInStorage, changeTitleInMemory, addTaskToProject, findProjectInStorageById, Container}
+export {removeProjectFromStorage, createProjectInStorage, changeTitleInMemory, addTaskToProject, findProjectInStorageById}

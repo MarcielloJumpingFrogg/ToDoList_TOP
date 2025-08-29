@@ -1,5 +1,5 @@
 import { Project, storage , findInStorage} from "./Project";
-import { createProjectInStorage , addTaskToProject, Container} from "./storageManag";
+import { createProjectInStorage , addTaskToProject} from "./storageManag";
 import { createProjectInPage } from "./DOMcreateElement";
 import Tasks from "./task";
 
@@ -37,7 +37,7 @@ const listOfProjects = []
 
 function addToListOfProjects(project) {
 
-    listOfProjects.push(new Container(project))
+    listOfProjects.push(new Project(project))
     
     for(let i = 1; i < localStorage.length; i++) 
     {
@@ -163,16 +163,6 @@ function deleteFromStorage(project) {
 
 function loadDivs()
 {
-    const list = document.getElementById('listOfProjects') 
-    
-    const div = list.querySelectorAll('[data-id]') 
-    div.forEach(element => {
-        const targetToFind = element.dataset.id
-        if(!foundId(fullList, targetToFind))
-        {
-            fullList.push(new Container(element))
-        } 
-    });
 
     fullList.forEach(div => {
         if(!div.loaded)
@@ -190,32 +180,6 @@ function loadProjects() {
 }
 
 
-function editInterface(container) {
-    return container.querySelector('.newTitleInterface')
-}
-
-
-
-function toggleVisibility(target){
-    target.classList.toggle('hidden')
-    target.classList.toggle('show')
-}
-
-
-
-
-function retrieveNewTitle(container) {
-    return container.querySelector('.inputEditProjectName').value
-}
-
-function retrieveOldTitle(container) {
-    return container.querySelector('.projectFilterButton')
-}
-
-
-function changeTitleInMemory(project, newTitle) {
-    findProject(project).changeTitle(newTitle)
-}
 
 
 
