@@ -1,5 +1,5 @@
-import { Project, storage , findInStorage} from "./Project";
-import { createProjectInStorage , addTaskToProject} from "./storageManag";
+import { Project, storage , findInStorage, toggleVisibility} from "./Project";
+import { insertProjectInStorage , addTaskToProject} from "./storageManag";
 import { createProjectInPage } from "./DOMcreateElement";
 import Tasks from "./task";
 
@@ -195,14 +195,10 @@ const submitNewProject = document.getElementById('submitNewProject')
 submitNewProject.onclick = function()
 {
     const newProjectName = document.getElementById('newProjectName').value
-    const id = createProjectInStorage(newProjectName)
-
-    const obj = findItemInObject(id)
+    const newProject = new Project(newProjectName)
+    insertProjectInStorage(newProject) 
     
-    createProjectInPage(obj.title, obj.id, list)
-    
-    
-    
+    createProjectInPage(newProject.title, newProject.id, list) 
 
     loadDivs()
 } 

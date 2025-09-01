@@ -106,17 +106,12 @@ function removeProjectFromStorage(projectId)
 
 }
 
-function createProjectInStorage(name)
-{
-    
-    const newProject = new Project(name)
+function insertProjectInStorage(newProject)
+{ 
 
     localStorage.setItem(newProject.id , JSON.stringify(newProject)) 
-    storage.push(newProject)
-
-    return newProject.id
-    //loadPage()
-
+    storage.push(newProject) 
+    //loadPage() 
     
 } 
 
@@ -152,4 +147,4 @@ function findProjectWithId(id) {
 }
 
 
-export {removeProjectFromStorage, createProjectInStorage, changeTitleInMemory, addTaskToProject, findProjectInStorageById}
+export {removeProjectFromStorage, insertProjectInStorage, changeTitleInMemory, addTaskToProject, findProjectInStorageById}

@@ -154,4 +154,4 @@ function retrieveOldTitle(container) {
  */
 
 
-export { Project, storage , findInStorage}
+export { Project, storage , findInStorage, toggleVisibility}
