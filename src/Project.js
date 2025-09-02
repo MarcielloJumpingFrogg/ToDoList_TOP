@@ -37,7 +37,8 @@ class Project{
 
     
     toggleTaskListVisibility() {
-        visibilityTaskList(this.container)
+        const taskContainer = this.container.querySelector('.taskContainer') 
+        taskContainer.classList.toggle('taskListHidden')
     }
 
     newTask() {
@@ -96,7 +97,7 @@ function getContainer(id)
 function findInStorage(id)
 {
     const thing = storage.find(project => project.id === id)
-    console.log(thing)
+    //console.log(thing)
     return thing
 }
 

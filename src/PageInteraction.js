@@ -120,64 +120,18 @@ function changeProjectDestination(project) {
 
 
 function toggleDropDownVisibility(item) {
+    console.log(item)
     const container = item.parentElement.parentElement
     const dropDownMenu = container.querySelector('.dropDownMenu')
     
     
     dropDownMenu.classList.toggle('dropDownMenuOpen')
-}
-
-
-function visibilityTaskList(item) {
-    const taskContainer = item.querySelector('.taskContainer')
-    console.log(taskContainer)
-    taskContainer.classList.toggle('taskListHidden')
-}
-
-
-
-function foundId(fullList, target)
-{
-    for (let i = 0; i < fullList.length;i++)
-    {
-        if(fullList[i].id == target)
-        {
-            return true
-        }
-    }
-    return false
-}
+} 
 
 
 function findProject(project) {
     return storage.find(name => name.id === project)
-}
-
-
-
-function deleteFromStorage(project) {
-    findProject(project).deleteSelf()
-}
-
-
-
-function loadDivs()
-{
-
-    fullList.forEach(div => {
-        if(!div.loaded)
-        {
-            div.loadEventListener()
-        }
-    
-    }); 
-
-}
-
-
-function loadProjects() {
-    
-}
+} 
 
 
 
@@ -198,9 +152,9 @@ submitNewProject.onclick = function()
     const newProject = new Project(newProjectName)
     insertProjectInStorage(newProject) 
     
-    createProjectInPage(newProject.title, newProject.id, list) 
+    newProject.createDomElement()
 
-    loadDivs()
+    //createProjectInPage(newProject.title, newProject.id, list) 
 } 
 
 
