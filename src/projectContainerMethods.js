@@ -35,7 +35,7 @@ class Container {
 
     newTask() {
         toggleVisibility(newTaskInterface)
-        changeProjectDestination(this.id)
+        changeDestinationForNewTask(this.id)
     }
 
 

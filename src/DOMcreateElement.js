@@ -45,13 +45,11 @@ function createProjectInPage(title, id)
     
     
     filterSideContainers.addEventListener('click' , function () {
-        console.log(event.target.parentElement.parentNode)
         activateCorrispondingFunctions(event.target), findInStorage(event.target.parentElement.parentNode.dataset.id)
         
     })
 
     projectSectionContainers.addEventListener('click' , function () {
-        console.log(event.target.parentElement.parentNode)
         activateCorrispondingFunctions(event.target), findInStorage(event.target.parentElement.parentNode.dataset.id)
         
     })
@@ -95,7 +93,10 @@ function containerForProjectSection(title)
 
     fullContainer.classList.add('projectListContainer')
 
-    fullContainer.appendChild(textSection(title))
+    const textTitle = textSection(title)
+    textTitle.classList.add('title')
+
+    fullContainer.appendChild(textTitle)
 
     const buttonContainer = createProjectButtons()
     const toggleTaskListVisibility = buttonCreator('>', 'toggleTaskVisibility')

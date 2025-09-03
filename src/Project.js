@@ -43,7 +43,7 @@ class Project{
 
     newTask() {
         toggleVisibility(newTaskInterface)
-        changeProjectDestination(this.id)
+        changeDestinationForNewTask(this.id)
     }
     
 
@@ -55,7 +55,6 @@ class Project{
     {
         createProjectInPage(this.title, this.id)
         this.container = getContainer(this.id)
-        console.log(this.container)
     }
 
 
@@ -65,10 +64,11 @@ class Project{
         deleteFromPageWithId(this.id)
     }
 
-    changeTitle(newTitle)
+    changeTitle()
     { 
-        this.title = newTitle 
-        changeTitleInMemory(this.id, newTitle)
+        this.title = retrieveNewTitle(this.container) 
+        changeTitleInMemory(this.id, this.title)
+        changeTitleInPage(this.id, this.title)
         //changeInMemory(newTitle)
     }
 
@@ -117,16 +117,7 @@ function deleteFromPageWithId(id) {
 
 
 
-function eventListenerAdder(item){ 
-    item.container.addEventListener('click', function(){ 
-        //console.log(event.target.classList)
-        activateCorrispondingFunctions(event.target, item)
-    })
-}
-
-
 function editInterface(container) {
-    console.log( container)
     return container.querySelector('.newTitleInterface')
 }
 
@@ -144,10 +135,49 @@ function retrieveNewTitle(container) {
     return container.querySelector('.inputEditProjectName').value
 }
 
-function retrieveOldTitle(container) {
-    return container.querySelector('.projectFilterButton')
-}
 
+function changeTitleInPage(id, newTitle) {
+    const elements = findIdInPage(id)
+    
+
+    elements.forEach(element => {
+        const oldTitleFilter = element.querySelector('.titleFilter')
+        const oldTitleText = element.querySelector('.title')
+
+        let oldTitleOption = checkIfOption(element)
+        
+        if(oldTitleFilter)
+        { 
+            oldTitleFilter.textContent = newTitle
+        }
+
+        if(oldTitleText)
+        {
+            oldTitleText.textContent = newTitle
+        }
+
+        if(oldTitleOption)
+        {
+            element.textContent = newTitle
+            oldTitleOption = ''
+        }
+    });
+
+
+        
+        
+    function checkIfOption(element)
+    {
+        if(element.nodeName == 'OPTION')
+        {   
+            return true
+        }
+        else
+        {
+            return false
+        } 
+    }
+}
 
 /* function changeTitleInMemory(project, newTitle) {
     findProject(project).changeTitle(newTitle)

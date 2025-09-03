@@ -77,6 +77,8 @@ function activateCorrispondingFunctions(target)
 
     const parent = findInStorage(target.parentNode.parentNode.dataset.id)
 
+    const container = findInStorage(target.parentElement.parentElement.parentElement.dataset.id)
+
     if(targetClass == 'projectFilterButton')
     {
         parent.filter()
@@ -91,11 +93,11 @@ function activateCorrispondingFunctions(target)
     }
     else if( targetClass == 'submitNewNameBtn')
     {
-        parent.changeTitle()
+        container.changeTitle()
     }
     else if( targetClass == 'newTaskButton') 
     {
-        parent.newTask()
+        newTaskInterfaceToggle(target)
     }
     else if (targetClass == 'openTask') 
     { 
@@ -112,7 +114,7 @@ function activateCorrispondingFunctions(target)
 }
 
 
-function changeProjectDestination(project) {
+function changeDestinationForNewTask(project) {
     const projectDestination = document.getElementById('projectDestination')
     const test = projectDestination.querySelector(`[data-id="${project}"`)
     test.selected = true;
@@ -173,9 +175,16 @@ function findItemInObject(parentId) {
 
 newTask.onclick = function () {
     toggleVisibility(newTaskInterface)
-    changeProjectDestination(1)
+    changeDestinationForNewTask(1)
 } 
 
+
+function newTaskInterfaceToggle(target)
+{
+    const id = target.parentElement.parentElement.dataset.id
+    toggleVisibility(newTaskInterface)
+    changeDestinationForNewTask(id)
+}
 
 
 function getAllNewTaskData() {
@@ -189,9 +198,12 @@ function getAllNewTaskData() {
 
     const description = getDescription()
 
-    const newTask = new Tasks(taskTitle, description, dueDateNewTask, priority)
+    const newTask = new Tasks(taskTitle, description, dueDateNewTask, priority) 
 
-    addTaskToProject(newTask, getDestination)
+
+    const project = findProject(getDestination)
+    project.addTask(newTask)
+    console.log(project)
 }
 
 
@@ -235,16 +247,6 @@ submitNewTask.onclick = function() {
 
 
 
-function reloadButton()
-{ 
-    loadDivs()
-}
-
-
-
-function loadTaskButtons() {
-
-}
 
 
 closePopUp.addEventListener('click', function() {
@@ -253,5 +255,4 @@ closePopUp.addEventListener('click', function() {
 })
 
 
-
-export {reloadButton, addToListOfProjects, activateCorrispondingFunctions}
+export {addToListOfProjects, activateCorrispondingFunctions}
