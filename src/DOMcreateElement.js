@@ -37,7 +37,7 @@ function createProjectInPage(title, id)
 
     projectsOnFilter.appendChild(filterSideContainers)
     projectOnList.appendChild(projectSectionContainers)
-
+    debugger
     projectSectionContainers.appendChild(createTaskMenu(id))
 
     //should not be using div.cloneNode
@@ -185,7 +185,7 @@ function addProjectToTaskSelection(title, id)
 
 
 
-function addGroupToPage(div, id) {
+/* function addGroupToPage(div, id) {
     const containerForEverything = document.createElement('div')
     containerForEverything.dataset.id = id
 
@@ -209,7 +209,7 @@ function addGroupToPage(div, id) {
     //addToListOfProjects(containerForEverything) //wtf
 
 }
-
+ */
 function createText(content, className) {
     const text = document.createElement('p')
     text.classList.add(className)
@@ -271,7 +271,7 @@ function createTaskElement(task) {
 
     upperSection.appendChild(createText(task.title, 'title'))
     upperSection.appendChild(createText(task.dueDate, 'dueDate'))
-    upperSection.appendChild(createText(task.priority, 'dueDate'))
+    upperSection.appendChild(createText(task.priority, 'priority'))
     upperSection.appendChild(createCheckBox())
     upperSection.appendChild(openTask())
     upperSection.appendChild(createDeleteElementTask())
@@ -287,7 +287,7 @@ function createTaskElement(task) {
 
 function createTaskMenu(projectId) {
     const taskContainer = document.createElement('div')
-    taskContainer.classList.add('taskListHidden')
+    //taskContainer.classList.add('taskListHidden')
     const newTaskButton = buttonCreator('New Task', 'newTaskButton')
     taskContainer.appendChild(newTaskButton)
     taskContainer.classList.add('taskContainer')
@@ -295,7 +295,12 @@ function createTaskMenu(projectId) {
 
     for(let i = 0; i < project.tasks.length; i++)
     {
-        taskContainer.appendChild( createTaskElement(project.tasks[i]))
+        console.log(project)
+        console.log(project.tasks)
+        console.log(project.tasks[i])
+        const task = createTaskElement(project.tasks[i])
+        console.log(task)
+        taskContainer.appendChild( task)
     }
     return taskContainer
 }
